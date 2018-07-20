@@ -65,14 +65,14 @@ _io = require('socket.io').listen(3301);
 
 require('events').EventEmitter.prototype.setMaxListeners(1000);
 
-// let connection = _io.on('connection', function(socket){
-//     _clients.push(socket);
+let connection = _io.on('connection', function(socket){
+    _clients.push(socket);
 
-//     socket.on('disconnect', function(){
-//         let currentPos = _clients.indexOf(socket);
+    socket.on('disconnect', function(){
+        let currentPos = _clients.indexOf(socket);
 
-//         if(currentPos != -1){
-//             _clients.splice(currentPos, 1);
-//         }
-//     });
-// })
+        if(currentPos != -1){
+            _clients.splice(currentPos, 1);
+        }
+    });
+})

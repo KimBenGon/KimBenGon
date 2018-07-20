@@ -115,35 +115,6 @@ exports.isDate = function(s) {
 };
 
 /*
- * 문자열 사업자번호 확인
- */
-exports.isBusinessNo = function(s) {
-  var str = s;
-  if (str.length == 12) str = str.replace(/-/g, '');
-  if (str.length != 10) return false;
-
-  for (var i = 0; i < str.length; i++) {
-    if (!str.charAt(i).isNum()) return false;
-  }
-
-  var checkID = new Array(1, 3, 7, 1, 3, 7, 1, 3, 5, 1);
-  var i, chkSum = 0,
-    c2, remander;
-
-  for (i = 0; i <= 7; i++) {
-    chkSum += checkID[i] * parseInt(str.charAt(i));
-  }
-
-  c2 = '0' + (checkID[8] * parseInt(str.charAt(8)));
-  c2 = c2.substring(c2.length - 2, c2.length);
-  chkSum += Math.floor(c2.charAt(0)) + Math.floor(c2.charAt(1));
-  remander = (10 - (chkSum % 10)) % 10;
-
-  if (Math.floor(str.charAt(9)) == remander) return true;
-  return false;
-};
-
-/*
  * byte단위 길이반환
  */
 exports.byteLen = function(s) {
