@@ -5,9 +5,9 @@ let bodyParser = require('body-parser');
 let cookieParser = require('cookie-parser');
 let http = require('http');
 let session = require('express-session');
-// let router = require('./router/main')(app);
 
-app.set('port', 3000);
+
+app.set('port', 8080);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
@@ -29,7 +29,7 @@ __rootPath = __dirname;
 // routes Setting
 /*************************************************************/
 app.get('/', function(req, res){
-    res.redirect('/html/index.html');
+    res.redirect('/html/Login.html');
 })
 app.use('/api/socket/', require('./routes/api/socket'));
 app.use('/api/login', require('./routes/api/login'));
@@ -38,7 +38,7 @@ app.use('/api/common', require('./routes/api/common'));
 // error handler
 /*************************************************************/
 app.use(function(req, res, next){
-    let err = new Error('Not Found');
+    let err = new Error('못 찾겠다 꾀꼬리');
     err.status = 404;
     next(err);
 });
@@ -61,18 +61,18 @@ http.createServer(app).listen(app.get('port'), function(){
 // socket.io
 /*************************************************************/
 _clients = [];
-_io = require('socket.io').listen(3001);
+_io = require('socket.io').listen(3301);
 
 require('events').EventEmitter.prototype.setMaxListeners(1000);
 
-let connection = _io.on('connection', function(socket){
-    _clients.push(socket);
+// let connection = _io.on('connection', function(socket){
+//     _clients.push(socket);
 
-    socket.on('disconnect', function(){
-        let currentPos = _clients.indexOf(socket);
+//     socket.on('disconnect', function(){
+//         let currentPos = _clients.indexOf(socket);
 
-        if(currentPos != -1){
-            _clients.splice(currentPos, 1);
-        }
-    });
-})
+//         if(currentPos != -1){
+//             _clients.splice(currentPos, 1);
+//         }
+//     });
+// })

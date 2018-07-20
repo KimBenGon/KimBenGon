@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<query>
+
+<!--
+	회원 로그인 확인
+
+	:USER_NO, :AUTH_KEY
+-->
+<Q0020>
+<![CDATA[
+
+SELECT COUNT(*) AS CHECK_COUNT, USER_ID, USER_NM, GRADE, CORP_NO
+FROM USER_INFO
+WHERE USER_NO = :USER_NO
+	AND AUTH_KEY = :AUTH_KEY
+	AND USE_YN = 'Y'
+	AND DEL_YN = 'N'
+
+]]>
+</Q0020>
+
+</query>
